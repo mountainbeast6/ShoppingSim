@@ -11,14 +11,17 @@ public class Customer extends Thread{
     private long leaveQueueTime; //time in ms customer shops for
     private long timeInQueue;
     private long minShopTime=3000;
-
+    private long maxShopTime=20000;
+    private long minCheckoutTime=1500;
+    private long maxCheckoutTime=10000;
     public long getTimeInQueue() {
         return timeInQueue;
     }
 
-    private long maxShopTime=20000;
-    private long minCheckoutTime=1500;
-    private long maxCheckoutTime=10000;
+    public long getCheckoutTime() {
+        return checkoutTime;
+    }
+
     public Customer(){
         id=nextID;
         nextID++;
