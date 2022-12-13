@@ -23,6 +23,7 @@ public class CustomerFactory extends Thread {
                     Customer c = new Customer();
                     customers.add(c);
                     c.start();
+                    Main.numMade++;
                 }
                 else {
                     System.out.println("did not make customer");

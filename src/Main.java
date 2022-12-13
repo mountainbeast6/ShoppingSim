@@ -6,38 +6,36 @@ public class Main {
     public static ConcurrentLinkedQueue<Customer> queue = new ConcurrentLinkedQueue<>();
     public static ArrayList<Customer>hopper = new ArrayList<>();
     public static boolean runnings = true;
+    public static long runTimeMS = 3000;
+    public static int numMade =0;
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
-        long runTimeMS = 10000;
+
         ArrayList<Customer> Customers = new ArrayList<>();
-        CustomerFactory customerFactory = new CustomerFactory(500, 1000, 30, Customers);
+        CustomerFactory customerFactory = new CustomerFactory(500, 1000, 50, Customers);
         customerFactory.start();
         ArrayList <Cashier> cashiers = new ArrayList<>();
-        cashiers.add(new Cashier());
-        cashiers.add(new Cashier());
         cashiers.add(new Cashier());
         while((startTime+runTimeMS)>System.currentTimeMillis()){
         }
         runnings =false;
-        while (!queue.isEmpty()){
-
-        }
-        long afterShift = System.currentTimeMillis()+12000;
-        while (afterShift>System.currentTimeMillis()){
-
+        while (numMade>hopper.size()){
+            System.out.println(numMade);
+            System.out.println(hopper.size());
         }
         System.out.println(avgCustWaitTime());
     }
-    public static long avgCustWaitTime(){
+    public static int avgCustWaitTime(){
         long total=0;
         long number=0;
         for(int i = 0;i<hopper.size()-1;i++){
-            number++;
+            number+=1;
             total += hopper.get(i).getTimeInQueue();
+            System.out.println(hopper.get(i).getTimeInQueue());
         }
         if (number == 0){
             return 0;
         }
-        return total/number;
+        return (int)total/(int)number;
     }
 }
