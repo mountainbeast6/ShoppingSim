@@ -15,7 +15,7 @@ public class CustomerFactory extends Thread {
         nextAttempt=System.currentTimeMillis()+(long)(timeLow+Math.random()*(timeHigh-timeLow));
     }
     public void run() {
-        while (true) {
+        while (Main.runnings) {
             if (nextAttempt<System.currentTimeMillis()){
                 randnum=(int)(1+Math.random()*99);
                 if(randnum>chance){
