@@ -3,7 +3,9 @@ public class Cashier extends Thread{
     private long startedWorkTime;
     private Customer workingWith; //
     public Cashier() {
+        this.start();
     }
+    @Override
     public void run(){
         while (true){
             if(!working){
@@ -12,12 +14,18 @@ public class Cashier extends Thread{
                     working=true;
                     System.out.println("Workin With Customer");
                     startedWorkTime= System.currentTimeMillis();
+                    if(workingWith!=null) {
+                        workingWith.pickedUp();
+                    }
                 }
             }
-            else if(workingWith.getCheckoutTime()+startedWorkTime<System.currentTimeMillis()){
-                Main.done.add(workingWith);
-                working=false;
-                System.out.println("Finished Customer Off ;)");
+            if(workingWith!=null) {
+                if (workingWith.getCheckoutTime() + startedWorkTime < System.currentTimeMillis()) {
+                    Main.hopper.add(workingWith);
+                    working = false;
+                    workingWith=null;
+                    System.out.println("Finished Customer Off ;)");
+                }
             }
         }
     }
